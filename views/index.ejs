@@ -1,0 +1,16 @@
+<% include partials/header %>
+  <h2><%= welcomeMessage %></h2>
+  <p><%= introMessage %></p>
+  <ul>
+    <% products.forEach(function(product) { %>
+      <li><%= product.name %></li>
+    <% }); %>
+  </ul>
+  <% if(botResponse !== '') { %>
+    <p><%= botResponse %></p>
+  <% } %>
+  <form class="" action="/userResponse/send" method="post">
+    <input type="text" name="userMessage" placeholder="Type your message...">
+    <input type="submit" name="btnSubmit">
+  </form>
+<% include partials/footer %>

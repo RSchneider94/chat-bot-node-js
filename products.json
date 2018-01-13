@@ -1,0 +1,177 @@
+[
+  {
+    "id": 1,
+    "name": "iPhone 7 128GB",
+    "brand": "Apple",
+    "category": "Phones & Tablets",
+    "subscriptionPrice": 44.99
+  },
+  {
+    "id": 2,
+    "name": "iPhone 7 32GB",
+    "brand": "Apple",
+    "category": "Phones & Tablets",
+    "subscriptionPrice": 39.99
+  },
+  {
+    "id": 3,
+    "name": "iPhone 7 Plus 128GB",
+    "brand": "Apple",
+    "category": "Phones & Tablets",
+    "subscriptionPrice": 49.99
+  },
+  {
+    "id": 4,
+    "name": "Galaxy S8 64GB",
+    "brand": "Samsung",
+    "category": "Phones & Tablets",
+    "subscriptionPrice": 44.99
+  },
+  {
+    "id": 5,
+    "name": "Galaxy S8+ 64GB",
+    "brand": "Samsung",
+    "category": "Phones & Tablets",
+    "subscriptionPrice": 49.99
+  },
+  {
+    "id": 6,
+    "name": "Drone BEBOP",
+    "brand": "Parrot",
+    "category": "Drones",
+    "subscriptionPrice": 49.99
+  },
+  {
+    "id": 7,
+    "name": "Drone BEBOP 2",
+    "brand": "Parrot",
+    "category": "Drones",
+    "subscriptionPrice": 59.99
+  },
+  {
+    "id": 8,
+    "name": "Vive",
+    "brand": "HTC",
+    "category": "Gaming & VR",
+    "subscriptionPrice": 59.99
+  },
+  {
+    "id": 9,
+    "name": "Virtual Reality Glasses Rift VR",
+    "brand": "Oculus",
+    "category": "Gaming & VR",
+    "subscriptionPrice": 59.99
+  },
+  {
+    "id": 10,
+    "name": "MacBook 12\" M-5Y31, 8GB RAM, 516GB",
+    "brand": "Apple",
+    "category": "Computing",
+    "subscriptionPrice": 59.99
+  },
+  {
+    "id": 11,
+    "name": "MacBook Air 11\" i7 2.2, 8GB RAM, 512GB",
+    "brand": "Apple",
+    "category": "Computing",
+    "subscriptionPrice": 64.99
+  },
+  {
+    "id": 12,
+    "name": "MacBook Air 13\" i5-5250U, 4GB RAM, 128GB",
+    "brand": "Apple",
+    "category": "Computing",
+    "subscriptionPrice": 69.99
+  },
+  {
+    "id": 13,
+    "name": "MacBook Pro 13\" i5-3210M, 4GB RAM, 500GB",
+    "brand": "Apple",
+    "category": "Computing",
+    "subscriptionPrice": 74.99
+  },
+  {
+    "id": 14,
+    "name": "Convertible Laptop Surface Book 512GB SSD Intel Core i7 16GB RAM dGPU",
+    "brand": "Microsoft",
+    "category": "Computing",
+    "subscriptionPrice": 59.99
+  },
+  {
+    "id": 15,
+    "name": "Convertible Laptop YOGA 300-11IBR 80M1004KGE",
+    "brand": "Lenovo",
+    "category": "Computing",
+    "subscriptionPrice": 59.99
+  },
+  {
+    "id": 16,
+    "name": "Watch 38mm",
+    "brand": "Apple",
+    "category": "Wearables",
+    "subscriptionPrice": 39.99
+  },
+  {
+    "id": 17,
+    "name": "Watch 42mm",
+    "brand": "Apple",
+    "category": "Wearables",
+    "subscriptionPrice": 44.99
+  },
+  {
+    "id": 18,
+    "name": "Watch Ambit 3",
+    "brand": "Suunto",
+    "category": "Wearables",
+    "subscriptionPrice": 39.99
+  },
+  {
+    "id": 19,
+    "name": "Watch V800",
+    "brand": "Polar",
+    "category": "Wearables",
+    "subscriptionPrice": 39.99
+  },
+  {
+    "id": 20,
+    "name": "Watch WI503Q-1LDBR0001",
+    "brand": "Asus",
+    "category": "Wearables",
+    "subscriptionPrice": 44.99
+  },
+  {
+    "id": 21,
+    "name": "Alexa Dot",
+    "brand": "Amazon",
+    "category": "Smart Home",
+    "subscriptionPrice": 44.99
+  },
+  {
+    "id": 22,
+    "name": "Alexa Echo",
+    "brand": "Amazon",
+    "category": "Smart Home",
+    "subscriptionPrice": 49.99
+  },
+  {
+    "id": 23,
+    "name": "Qbo Milk Master",
+    "brand": "Tchibo",
+    "category": "Smart Home",
+    "subscriptionPrice": 29.99
+  },
+  {
+    "id": 24,
+    "name": "Robotic Vacuum Cleaner POWERbot VR20J9020UR/EG",
+    "brand": "Samsung",
+    "category": "Smart Home",
+    "subscriptionPrice": 39.99
+  },
+  {
+    "id": 25,
+    "name": "Robotic Vacuum Cleaner POWERbot VR20J9259U/EG",
+    "brand": "Samsung",
+    "category": "Smart Home",
+    "subscriptionPrice": 39.99
+  }
+]
