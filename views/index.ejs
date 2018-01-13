@@ -1,27 +1,36 @@
 <% include partials/header %>
-  <div id="intro" style="float: left; width: 50%; border-right: 2px solid #000">
+<div class="row">
+  <div class="col-sm-12" id="intro">
     <h2><%= welcomeMessage %></h2>
     <p><%= introMessage %></p>
-    <ul>
+    <form action="/userResponse/send" method="post">
+      <input class="form-control" type="text" name="userMessage" placeholder="Type your message...">
+      <button class="btn btn-primary" type="submit" name="btnSubmit">Submit Message</button>
+    </form>
+    <!-- <ul>
       <% products.forEach(function(product) { %>
         <li><%= product.name %></li>
       <% }); %>
-    </ul>
+    </ul> -->
   </div>
-  <div id="chat" style="float: right; width: 48%;">
-    <% if(userResponse !== '') {
-      userResponse.forEach(function(response) { %>
-        <p>User: <%= response %></p>
-      <% });
-    } %>
-    <% if(botResponse !== '') {
-      botResponse.forEach(function(response){ %>
-        <p>Bot: <%= response %></p>
-      <% });
-     } %>
-    <form class="" action="/userResponse/send" method="post">
-      <input type="text" name="userMessage" placeholder="Type your message...">
-      <input type="submit" name="btnSubmit">
-    </form>
+</div>
+<hr>
+<div class="row">
+  <div class="col-sm-12" id="chat">
+    <div class="col-sm-6 text-left" id="userResponses">
+      <% if(userResponse !== '') {
+        userResponse.forEach(function(response) { %>
+          <div class="col-sm-6 alert alert-dark">User: <%= response %></div>
+          <% });
+        } %>
+    </div>
+    <div class="col-sm-6 text-right" id="botResponses">
+      <% if(botResponse !== '') {
+        botResponse.forEach(function(response){ %>
+          <div class="col-sm-6 alert alert-success">Bot: <%= response %></div>
+          <% });
+        } %>
+    </div>
   </div>
+</div>
 <% include partials/footer %>
