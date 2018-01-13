@@ -17,6 +17,6 @@ module.exports = {
     var matchedProduct = productsList.find(function(product) {
       return product.name === userResponse;
     });
-    return matchedProduct.subscriptionPrice;
+    return "The subscription price of the asked product is: " +  matchedProduct.subscriptionPrice;
   }
 };

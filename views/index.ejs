@@ -6,8 +6,12 @@
       <li><%= product.name %></li>
     <% }); %>
   </ul>
+  <hr>
+  <% if(userResponse !== '') { %>
+    <p>User: <%= userResponse %></p>
+  <% } %>
   <% if(botResponse !== '') { %>
-    <p><%= botResponse %></p>
+    <p>Bot: <%= botResponse %></p>
   <% } %>
   <form class="" action="/userResponse/send" method="post">
     <input type="text" name="userMessage" placeholder="Type your message...">

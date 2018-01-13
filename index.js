@@ -17,6 +17,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 /* Local Variables */
 app.use(function(req, res, next){
   res.locals.botResponse = '';
+  res.locals.userResponse = '';
   next();
 });
 
@@ -37,12 +38,12 @@ app.post('/userResponse/send', (req, res) => {
     userMessage : req.body.userMessage
   };
   tools.recordNewMessage(newUserResponse);
-  console.log(tools.checkUserResponse(newUserResponse.userMessage, productsList));
   botResponse = tools.checkUserResponse(newUserResponse.userMessage, productsList);
   res.render('index', {
     welcomeMessage : 'Hello! Welcome to Grover chat!',
     introMessage: 'In this chat you could ask for any product name (listed below) and I could give you the subscription price for it.',
     products : productsList,
+    userResponse: newUserResponse.userMessage,
     botResponse : botResponse
   });
 });
