@@ -33,18 +33,22 @@ app.get('/', (req, res) => {
   });
 });
 
+/* Global Arrays to store responses */
+const arrUserResponses = [];
+const arrBotResponses = [];
+
 app.post('/userResponse/send', (req, res) => {
-  var newUserResponse = {
-    userMessage : req.body.userMessage
-  };
-  tools.recordNewMessage(newUserResponse);
-  botResponse = tools.checkUserResponse(newUserResponse.userMessage, productsList);
+  var newResponseUserInput = req.body.userMessage;
+  arrUserResponses.push(newResponseUserInput);
+  tools.recordNewMessage(newResponseUserInput);
+  botResponse = tools.checkUserResponse(newResponseUserInput, productsList);
+  arrBotResponses.push(botResponse);
   res.render('index', {
     welcomeMessage : 'Hello! Welcome to Grover chat!',
     introMessage: 'In this chat you could ask for any product name (listed below) and I could give you the subscription price for it.',
     products : productsList,
-    userResponse: newUserResponse.userMessage,
-    botResponse : botResponse
+    userResponse: arrUserResponses,
+    botResponse : arrBotResponses
   });
 });
 

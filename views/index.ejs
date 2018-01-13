@@ -9,12 +9,16 @@
     </ul>
   </div>
   <div id="chat" style="float: right; width: 48%;">
-    <% if(userResponse !== '') { %>
-      <p>User: <%= userResponse %></p>
-    <% } %>
-    <% if(botResponse !== '') { %>
-      <p>Bot: <%= botResponse %></p>
-    <% } %>
+    <% if(userResponse !== '') {
+      userResponse.forEach(function(response) { %>
+        <p>User: <%= response %></p>
+      <% });
+    } %>
+    <% if(botResponse !== '') {
+      botResponse.forEach(function(response){ %>
+        <p>Bot: <%= response %></p>
+      <% });
+     } %>
     <form class="" action="/userResponse/send" method="post">
       <input type="text" name="userMessage" placeholder="Type your message...">
       <input type="submit" name="btnSubmit">

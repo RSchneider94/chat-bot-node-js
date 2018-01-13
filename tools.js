@@ -5,7 +5,7 @@ module.exports = {
   recordNewMessage: function(userResponse) {
     fs.open('./records/records.txt', 'a', (err, fd) => {
       if (err) throw err;
-      fs.appendFile(fd, "User: " + userResponse.userMessage + "\n", 'utf8', (err) => {
+      fs.appendFile(fd, userResponse + "\n", 'utf8', (err) => {
         fs.close(fd, (err) => {
           if (err) throw err;
         });
