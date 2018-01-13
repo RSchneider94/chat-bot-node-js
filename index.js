@@ -38,9 +38,12 @@ const arrUserResponses = [];
 const arrBotResponses = [];
 
 app.post('/userResponse/send', (req, res) => {
+  //stores the user's response from form
   var newResponseUserInput = req.body.userMessage;
   arrUserResponses.push(newResponseUserInput);
+  //record the user message in a file
   tools.recordNewMessage(newResponseUserInput);
+  //stores the bot's response
   botResponse = tools.checkUserResponse(newResponseUserInput, productsList);
   arrBotResponses.push(botResponse);
   res.render('index', {
