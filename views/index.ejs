@@ -1,20 +1,23 @@
 <% include partials/header %>
-  <h2><%= welcomeMessage %></h2>
-  <p><%= introMessage %></p>
-  <ul>
-    <% products.forEach(function(product) { %>
-      <li><%= product.name %></li>
-    <% }); %>
-  </ul>
-  <hr>
-  <% if(userResponse !== '') { %>
-    <p>User: <%= userResponse %></p>
-  <% } %>
-  <% if(botResponse !== '') { %>
-    <p>Bot: <%= botResponse %></p>
-  <% } %>
-  <form class="" action="/userResponse/send" method="post">
-    <input type="text" name="userMessage" placeholder="Type your message...">
-    <input type="submit" name="btnSubmit">
-  </form>
+  <div id="intro" style="float: left; width: 50%; border-right: 2px solid #000">
+    <h2><%= welcomeMessage %></h2>
+    <p><%= introMessage %></p>
+    <ul>
+      <% products.forEach(function(product) { %>
+        <li><%= product.name %></li>
+      <% }); %>
+    </ul>
+  </div>
+  <div id="chat" style="float: right; width: 48%;">
+    <% if(userResponse !== '') { %>
+      <p>User: <%= userResponse %></p>
+    <% } %>
+    <% if(botResponse !== '') { %>
+      <p>Bot: <%= botResponse %></p>
+    <% } %>
+    <form class="" action="/userResponse/send" method="post">
+      <input type="text" name="userMessage" placeholder="Type your message...">
+      <input type="submit" name="btnSubmit">
+    </form>
+  </div>
 <% include partials/footer %>
