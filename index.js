@@ -20,6 +20,11 @@ app.use(function(req, res, next){
   next();
 });
 
+/* Global Arrays to store responses */
+const arrUserResponses = [];
+const arrBotResponses = ['In this chat you could ask for any of our products and I will give you the subscription price for it. Type "list" for a list of products.'];
+
+
 //View Engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -27,26 +32,21 @@ app.set('views', path.join(__dirname, 'views'));
 app.get('/', (req, res) => {
   res.render('index', {
     chatTitle : 'Customer Service Chat',
-    botWelcomeMessage : 'In this chat you could ask for any of our products and I will give you the subscription price for it. Type "list" for a list of products.'
+    botResponse : arrBotResponses
   });
 });
-
-/* Global Arrays to store responses */
-const arrUserResponses = [];
-const arrBotResponses = [];
 
 app.post('/userResponse/send', (req, res) => {
   //stores the user's response from form
   var newResponseUserInput = req.body.userMessage;
-  arrUserResponses.push(newResponseUserInput);
+  arrUserResponses.unshift(newResponseUserInput);
   //record the user message in a file
   tools.recordNewMessage(newResponseUserInput);
   //stores the bot's response
   botResponse = tools.checkUserResponse(newResponseUserInput);
-  arrBotResponses.push(botResponse);
+  arrBotResponses.unshift(botResponse);
   res.render('index', {
     chatTitle : 'Customer Service Chat',
-    botWelcomeMessage : 'In this chat you could ask for any of our products and I will give you the subscription price for it. Type "list" for a list of products.',
     userResponse: arrUserResponses,
     botResponse : arrBotResponses
   });

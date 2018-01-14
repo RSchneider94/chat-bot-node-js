@@ -14,19 +14,17 @@
   </div>
   <div class="col-sm-6" id="userReplies">
     <% if(userResponse !== '') {
-      userResponse.reverse().forEach(function(response) { %>
+      userResponse.forEach(function(response) { %>
         <div class="col-sm-12 alert alert-dark text-left">User: <%= response %></div>
         <% });
       } %>
   </div>
   <div class="col-sm-6" id="botReplies">
     <% if(botResponse !== '') {
-        botResponse.reverse().forEach(function(response){ %>
+        botResponse.forEach(function(response){ %>
           <div class="col-sm-12 alert alert-success text-left">Bot: <%- response %></div>
           <% });
-        } else { %>
-          <div class="col-sm-12 alert alert-success text-left">Bot: <%= botWelcomeMessage %></div>
-        <% } %>
+        } %>
   </div>
 </div>
 <% include partials/footer %>
