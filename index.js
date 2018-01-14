@@ -2,7 +2,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
-const productsList = require('./products.json');
 const tools = require('./tools.js');
 
 /* Easier Path for using with __dirname */
@@ -27,9 +26,8 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.get('/', (req, res) => {
   res.render('index', {
-    welcomeMessage : 'Hello! Welcome to Grover chat!',
-    introMessage: 'In this chat you could ask for any product name (listed below) and I could give you the subscription price for it.',
-    products : productsList
+    chatTitle : 'Customer Service Chat',
+    botWelcomeMessage : 'In this chat you could ask for any of our products and I will give you the subscription price for it. Type "list" for a list of products.'
   });
 });
 
@@ -44,12 +42,11 @@ app.post('/userResponse/send', (req, res) => {
   //record the user message in a file
   tools.recordNewMessage(newResponseUserInput);
   //stores the bot's response
-  botResponse = tools.checkUserResponse(newResponseUserInput, productsList);
+  botResponse = tools.checkUserResponse(newResponseUserInput);
   arrBotResponses.push(botResponse);
   res.render('index', {
-    welcomeMessage : 'Hello! Welcome to Grover chat!',
-    introMessage: 'In this chat you could ask for any product name (listed below) and I could give you the subscription price for it.',
-    products : productsList,
+    chatTitle : 'Customer Service Chat',
+    botWelcomeMessage : 'In this chat you could ask for any of our products and I will give you the subscription price for it. Type "list" for a list of products.',
     userResponse: arrUserResponses,
     botResponse : arrBotResponses
   });

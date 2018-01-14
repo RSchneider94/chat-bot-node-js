@@ -1,4 +1,5 @@
 const fs = require('fs');
+const productsList = require('./products.json');
 
 module.exports = {
   /*
@@ -20,11 +21,18 @@ module.exports = {
     Function used to check each user message and makes bot reply to him according
     params: userResponse, productsList : array of objects
   */
-  checkUserResponse: function(userResponse, productsList) {
+  checkUserResponse: function(userResponse) {
     if(userResponse === '') var error = "Sorry, you should type something.";
+    if(userResponse === 'list') {
+      var arrProducts = [];
+      productsList.forEach(function(product) {
+        arrProducts.push(product.name);
+      });
+      return arrProducts.join('<br>');
+    }
     var matchedProduct = productsList.find(function(product) {
       return product.name.toUpperCase() === userResponse.toUpperCase();
     });
-    return matchedProduct && !error ? "The subscription price of the asked product is: " + matchedProduct.subscriptionPrice : !error ? "Sorry, no product was found with this criteria" : error;
+    return matchedProduct && !error ? "The subscription price of " + matchedProduct.name + " product is: €" + matchedProduct.subscriptionPrice : !error ? "Sorry, no product was found with this criteria" : error;
   }
 };
