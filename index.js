@@ -1,3 +1,9 @@
+/*******************************************************************
+* Entry application file. This file handles the application at all *
+* based in ExpressJS framework with Node.JS                        *
+ *******************************************************************/
+
+
 /* Requires */
 const express = require('express');
 const bodyParser = require('body-parser');

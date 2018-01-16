@@ -1,3 +1,11 @@
+/****************************************************
+* Tool.js is responsible for handling the functions *
+* that are important to index.js (main app).        *
+* Example: function to write (log) user messages    *
+* to a file inside project.                         *
+ ****************************************************/
+
+
 const fs = require('fs');
 const productsList = require('./products.json');
 
