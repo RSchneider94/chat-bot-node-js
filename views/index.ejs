@@ -12,19 +12,18 @@
       <button class="btn btn-primary" type="submit" name="btnSubmit" style="margin: 10px 0;">Submit Message</button>
     </form>
   </div>
-  <div class="col-sm-6" id="userReplies">
-    <% if(userResponse !== '') {
-      userResponse.forEach(function(response) { %>
-        <div class="col-sm-12 alert alert-dark text-left">User: <%= response %></div>
-        <% });
-      } %>
-  </div>
-  <div class="col-sm-6" id="botReplies">
-    <% if(botResponse !== '') {
-        botResponse.forEach(function(response){ %>
-          <div class="col-sm-12 alert alert-success text-left">Bot: <%- response %></div>
-          <% });
+  <div class="col-sm-12" id="chat">
+    <% if(arrGroupedResponses !== '') {
+      arrGroupedResponses.forEach(function(response) {
+        var responseClass;
+        if(response.includes('Bot')) {
+          responseClass = 'alert-dark text-left botResponse';
+        } else {
+          responseClass = 'alert-success text-right userResponse';
         } %>
+        <div class="col-sm-12 alert <%=responseClass%>"><%- response %></div>
+      <% });
+    } %>
   </div>
 </div>
 <% include partials/footer %>

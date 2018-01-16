@@ -8,6 +8,11 @@
 const fs = require('fs');
 const productsList = require('./products.json');
 
+/********************
+ * Global variables *
+ ********************/
+const botResponseTemplate = 'Bot says: ';
+
 module.exports = {
   /**
    * This function is responsible to handle the record (log) of user's message
@@ -35,19 +40,19 @@ module.exports = {
 
     switch(true) {
       case userResponse === '':
-        return "Sorry, you should type something.";
+        return botResponseTemplate + "Sorry, you should type something.";
         break;
       case userResponse.includes('list'):
         productsList.forEach(function(product) {
           arrFilteredProductsList.push(product.name);
         });
-        return "Here is the list of all of our products:<br><br>" + arrFilteredProductsList.join('<br>');
+        return botResponseTemplate + "Here is the list of all of our products:<br><br>" + arrFilteredProductsList.join('<br>');
         break;
       case userResponse.includes('categories') || userResponse.includes('category'):
         productsList.forEach(function(product) {
           arrFilteredProductsList.push(product.category);
         });
-        return "Here is the list of all of our product's categories:<br><br>" + arrFilteredProductsList.join('<br>');
+        return botResponseTemplate + "Here is the list of all of our product's categories:<br><br>" + arrFilteredProductsList.join('<br>');
         break;
       default:
         /***********************************************************************************
@@ -62,14 +67,14 @@ module.exports = {
          ****************************************************************************************************************/
         if (responseMatchedWithProductsBrands.length >= 1) {
           responseMatchedWithProductsBrands.forEach(product => arrFilteredProductsList.push(product.name));
-          return "Here is the product's brands that matched your criteria:<br><br>" + arrFilteredProductsList.join('<br>');
+          return botResponseTemplate + "Here is the product's brands that matched your criteria:<br><br>" + arrFilteredProductsList.join('<br>');
         } else if(responseMatchedWithProductsCategories.length >= 1) {
           responseMatchedWithProductsCategories.forEach(product => arrFilteredProductsList.push(product.name));
-          return "Here is the product's categories that matched your criteria:<br><br>" + arrFilteredProductsList.join('<br>');
+          return botResponseTemplate + "Here is the product's categories that matched your criteria:<br><br>" + arrFilteredProductsList.join('<br>');
         } else if(responseMatchedWithSingleProduct){
-          return "The subscription price for " + responseMatchedWithSingleProduct.name + " is €" + responseMatchedWithSingleProduct.subscriptionPrice;
+          return botResponseTemplate + "The subscription price for " + responseMatchedWithSingleProduct.name + " is €" + responseMatchedWithSingleProduct.subscriptionPrice;
         } else {
-          return "Sorry, no products matched your criteria. Try something else.";
+          return botResponseTemplate + "Sorry, no products matched your criteria. Try something else.";
         }
     }
   }
