@@ -5,15 +5,14 @@
 * to a file inside project.                         *
  ****************************************************/
 
-
 const fs = require('fs');
 const productsList = require('./products.json');
 
 module.exports = {
-  /*
-    Function used to record each user message into a file in records/records.text
-    params: userResponse
-  */
+  /**
+   * This function is responsible to handle the record (log) of user's message
+   * @param  {string} userResponse receive the user input from form
+   */
   recordNewMessage: function(userResponse) {
     fs.open('./records/records.txt', 'a', (err, fd) => {
       if (err) throw err;
@@ -25,22 +24,53 @@ module.exports = {
       });
     });
   },
-  /*
-    Function used to check each user message and makes bot reply to him according
-    params: userResponse, productsList : array of objects
-  */
+  /**
+   * This function is responsible to handle the user input message
+   * @param  {string} userResponse receive the user input from form
+   * @return {array or string} returns arrays in cases where user asks for a list or string if just single product
+   */
   checkUserResponse: function(userResponse) {
-    if(userResponse === '') var error = "Sorry, you should type something.";
-    if(userResponse === 'list') {
-      var arrProducts = [];
-      productsList.forEach(function(product) {
-        arrProducts.push(product.name);
-      });
-      return arrProducts.join('<br>');
+    /** @type {Array} This variable is responsible to return array when the user asks for listing. Eg: brands */
+    var arrFilteredProductsList = [];
+
+    switch(true) {
+      case userResponse === '':
+        return "Sorry, you should type something.";
+        break;
+      case userResponse.includes('list'):
+        productsList.forEach(function(product) {
+          arrFilteredProductsList.push(product.name);
+        });
+        return "Here is the list of all of our products:<br><br>" + arrFilteredProductsList.join('<br>');
+        break;
+      case userResponse.includes('categories') || userResponse.includes('category'):
+        productsList.forEach(function(product) {
+          arrFilteredProductsList.push(product.category);
+        });
+        return "Here is the list of all of our product's categories:<br><br>" + arrFilteredProductsList.join('<br>');
+        break;
+      default:
+        /***********************************************************************************
+         * This arrays are used as temporary to assign functions of filtering and finding. *
+         ***********************************************************************************/
+        var responseMatchedWithProductsBrands = productsList.filter(product => product.brand.toUpperCase().includes(userResponse.toUpperCase()));
+        var responseMatchedWithProductsCategories = productsList.filter(product => product.category.toUpperCase().includes(userResponse.toUpperCase()));
+        var responseMatchedWithSingleProduct = productsList.find(product => product.name.toUpperCase() === userResponse.toUpperCase());
+
+        /****************************************************************************************************************
+         * returns according to what user asked for. E.g a list of product's according to a specific brand or categorie *
+         ****************************************************************************************************************/
+        if (responseMatchedWithProductsBrands.length >= 1) {
+          responseMatchedWithProductsBrands.forEach(product => arrFilteredProductsList.push(product.name));
+          return "Here is the product's brands that matched your criteria:<br><br>" + arrFilteredProductsList.join('<br>');
+        } else if(responseMatchedWithProductsCategories.length >= 1) {
+          responseMatchedWithProductsCategories.forEach(product => arrFilteredProductsList.push(product.name));
+          return "Here is the product's categories that matched your criteria:<br><br>" + arrFilteredProductsList.join('<br>');
+        } else if(responseMatchedWithSingleProduct){
+          return "The subscription price for " + responseMatchedWithSingleProduct.name + " is €" + responseMatchedWithSingleProduct.subscriptionPrice;
+        } else {
+          return "Sorry, no products matched your criteria. Try something else.";
+        }
     }
-    var matchedProduct = productsList.find(function(product) {
-      return product.name.toUpperCase() === userResponse.toUpperCase();
-    });
-    return matchedProduct && !error ? "The subscription price of " + matchedProduct.name + " product is: €" + matchedProduct.subscriptionPrice : !error ? "Sorry, no product was found with this criteria" : error;
   }
 };

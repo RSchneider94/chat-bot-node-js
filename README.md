@@ -11,9 +11,13 @@ and as user you could ask for any product and you will have more information abo
 
 ### Version 1.0
 
-- First basic UI layout
+- First basic UI
 - User could type the product's exactly name or type list to get a list of products
 
 ### Version 2.0
 
-To be done.
+- Improved UI
+- Changes to function that checks user's responses
+  - Now the user could filter products listing by categories of a product or for a specific product's brand
+  - Now the user could type "categories" for a list of product's categories
+  - Keywords "list" and "categories" are now working even if user types like "please, a list of products". Detecting the keyword all along the phrase
