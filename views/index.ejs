@@ -1,29 +1,31 @@
 <% include partials/header %>
 <div class="row">
   <div class="col-sm-12 text-center" id="intro">
-    <h2><%= chatTitle %></h2>
+    <h2>Customer Service <span class="highlight">Chat <i class="fa fa-comment fa-2x" aria-hidden="true"></i></span></h2>
   </div>
 </div>
 <hr>
 <div class="row">
-  <div class="col-sm-12">
-    <form action="/userResponse/send" method="post">
-      <input class="form-control" type="text" name="userMessage" placeholder="Type your message...">
-      <button class="btn btn-primary" type="submit" name="btnSubmit" style="margin: 10px 0;">Submit Message</button>
-    </form>
-  </div>
   <div class="col-sm-12" id="chat">
     <% if(arrGroupedResponses !== '') {
       arrGroupedResponses.forEach(function(response) {
         var responseClass;
         if(response.includes('Bot')) {
-          responseClass = 'alert-dark text-left botResponse';
+          responseClass = 'text-left botResponse';
         } else {
-          responseClass = 'alert-success text-right userResponse';
+          responseClass = 'text-right userResponse';
         } %>
         <div class="col-sm-12 alert <%=responseClass%>"><%- response %></div>
       <% });
     } %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <form id="messageForm" action="/userResponse/send" method="post">
+      <input class="form-control" type="text" name="userMessage" placeholder="Type your message...">
+      <button class="btn btn-success" type="submit" name="btnSubmit">Submit Message</button>
+    </form>
   </div>
 </div>
 <% include partials/footer %>

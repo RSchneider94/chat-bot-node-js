@@ -28,7 +28,6 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.get('/', (req, res) => {
   res.render('index', {
-    chatTitle : 'Customer Service Chat',
     arrGroupedResponses : arrGroupedResponses
   });
 });
@@ -43,7 +42,6 @@ app.post('/userResponse/send', (req, res) => {
   botResponse = tools.checkUserResponse(newResponseUserInput);
   arrGroupedResponses.push(botResponse);
   res.render('index', {
-    chatTitle : 'Customer Service Chat',
     arrGroupedResponses: arrGroupedResponses
   });
 });
