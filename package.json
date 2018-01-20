@@ -1,6 +1,6 @@
 {
   "name": "chat-bot-node",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A ChatBot made with node.js for a job interview.",
   "main": "index.js",
   "scripts": {

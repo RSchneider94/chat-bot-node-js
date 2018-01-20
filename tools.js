@@ -12,16 +12,20 @@ const productsList = require('./products.json');
  * Global variables *
  ********************/
 const botResponseTemplate = 'Bot says: ';
+/** @type {Array}
+This array is used to store the latest bot responses. It is used to help the bot
+to continue the flow of conversation in case user asks for subscription price for example */
+let arrLastListing = [];
 
 module.exports = {
   /**
    * This function is responsible to handle the record (log) of user's message
    * @param  {string} userResponse receive the user input from form
    */
-  recordNewMessage: function(userResponse) {
-    fs.open('./records/records.txt', 'a', (err, fd) => {
+  recordNewMessage: function(arrGroupedResponses) {
+    fs.open('./records/records.txt', 'w', (err, fd) => {
       if (err) throw err;
-      fs.appendFile(fd, userResponse + "\n", 'utf8', (err) => {
+      fs.writeFile(fd, arrGroupedResponses.join("\n"), 'utf8', (err) => {
         fs.close(fd, (err) => {
           if (err) throw err;
         });
@@ -36,7 +40,7 @@ module.exports = {
    */
   checkUserResponse: function(userResponse) {
     /** @type {Array} This variable is responsible to return array when the user asks for listing. Eg: brands */
-    var arrFilteredProductsList = [];
+    let arrFilteredProductsList = [];
 
     switch(true) {
       case userResponse === '':
@@ -54,6 +58,17 @@ module.exports = {
         });
         return botResponseTemplate + "Here is the list of all of our product's categories:<br><br>" + arrFilteredProductsList.join('<br>');
         break;
+      case userResponse.includes('subscription price') || userResponse.includes('subscription') || userResponse.includes('price'):
+        let arrPreviousListingProductsPrice = [];
+        if (arrLastListing.length >= 1) {
+          arrLastListing.forEach(product => arrPreviousListingProductsPrice.push("Product: " + product.name + " | Price: €" + product.subscriptionPrice));
+          // The arrLastListing is cleaned every time after it's used, as it's used just to store last bot responses temporarily
+          arrLastListing = [];
+          return botResponseTemplate + "Here is the subscription price(s) for above product(s):<br><br>" + arrPreviousListingProductsPrice.join("<br>");
+        } else {
+          return botResponseTemplate + "For which product you want to know the subscription price? Remember: you could ask for brand, category or list also.";
+        }
+        break;
       default:
         /***********************************************************************************
          * This arrays are used as temporary to assign functions of filtering and finding. *
@@ -66,12 +81,22 @@ module.exports = {
          * returns according to what user asked for. E.g a list of product's according to a specific brand or categorie *
          ****************************************************************************************************************/
         if (responseMatchedWithProductsBrands.length >= 1) {
-          responseMatchedWithProductsBrands.forEach(product => arrFilteredProductsList.push(product.name));
+          // The arrLastListing is cleaned every time after it's used, as it's used just to store last bot responses temporarily
+          arrLastListing = [];
+          responseMatchedWithProductsBrands.forEach(product => {
+            arrFilteredProductsList.push(product.name);
+            arrLastListing.push(product);
+          });
           return botResponseTemplate + "Here is the product's brands that matched your criteria:<br><br>" + arrFilteredProductsList.join('<br>');
         } else if(responseMatchedWithProductsCategories.length >= 1) {
-          responseMatchedWithProductsCategories.forEach(product => arrFilteredProductsList.push(product.name));
+          // The arrLastListing is cleaned every time after it's used, as it's used just to store last bot responses temporarily
+          arrLastListing = [];
+          responseMatchedWithProductsCategories.forEach(product => {
+            arrFilteredProductsList.push(product.name);
+            arrLastListing.push(product);
+          });
           return botResponseTemplate + "Here is the product's categories that matched your criteria:<br><br>" + arrFilteredProductsList.join('<br>');
-        } else if(responseMatchedWithSingleProduct){
+        } else if(responseMatchedWithSingleProduct) {
           return botResponseTemplate + "The subscription price for " + responseMatchedWithSingleProduct.name + " is €" + responseMatchedWithSingleProduct.subscriptionPrice;
         } else {
           return botResponseTemplate + "Sorry, no products matched your criteria. Try something else.";
